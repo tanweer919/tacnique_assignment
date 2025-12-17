@@ -32,21 +32,16 @@ class QuizView(APIView):
 								return Response({"error": "Quiz not found"}, status=status.HTTP_404_NOT_FOUND)
 						
 						correct_count = 0
-						for answer in answers:
-								question_id = answer.get('question_id')
-								user_answer = answer.get('answer_text')
+						for question_id in answers.keys():
+								user_answer = answers[question_id]
 								
 								try:
 										question = Question.objects.get(id=question_id, quiz=quiz)
 								except Question.DoesNotExist:
 										continue
 								
-								if question.question_type == 'TEXT':
-										if question.answer_text.strip().lower() == user_answer.strip().lower():
-												correct_count += 1
-								else:
-										if question.answer_text == user_answer:
-												correct_count += 1
+								if question.answer_text.strip().lower() == user_answer.strip().lower():
+										correct_count += 1
 						
 						total_questions = quiz.questions.count()
 						score = {

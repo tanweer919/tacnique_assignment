@@ -24,8 +24,4 @@ class QuizSerializer(serializers.ModelSerializer):
     
 class SubmitQuizSerializer(serializers.Serializer):
 		quiz_id = serializers.IntegerField()
-		answers = serializers.ListField(
-				child=serializers.DictField(
-						child=serializers.CharField()
-				)
-		)
+		answers = serializers.DictField(child=serializers.CharField())
