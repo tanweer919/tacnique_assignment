@@ -13,7 +13,7 @@ const fetchQuizzes = async () => {
   }
 };
 
-const fetchQuizDetails = async (quizId) => {
+const fetchQuizDetails = async (quizId:any) => {
   try {
     const response = await axios.get(`${BASE_URL}/quiz/${quizId}/`);
     return response.data;
@@ -23,7 +23,7 @@ const fetchQuizDetails = async (quizId) => {
   }
 };
 
-const submitQuizAnswers = async (quizId, answers) => {
+const submitQuizAnswers = async (quizId:any, answers:any) => {
   try {
     const response = await axios.post(`${BASE_URL}/quiz/submit/`, {
       quiz_id: quizId,
